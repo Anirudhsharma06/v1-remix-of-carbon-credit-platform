@@ -1,0 +1,144 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Updated color scheme to match design specifications */
+  --background: oklch(0.99 0.01 180); /* #fafcfc - Very light teal-tinted white */
+  --foreground: oklch(0.2 0.02 180); /* #1a2e2e - Deep teal-gray for text */
+  --card: oklch(1 0 0); /* #ffffff - Pure white for cards */
+  --card-foreground: oklch(0.2 0.02 180); /* #1a2e2e - Deep teal-gray text on cards */
+  --popover: oklch(1 0 0); /* #ffffff - White popover background */
+  --popover-foreground: oklch(0.2 0.02 180); /* #1a2e2e - Deep teal-gray popover text */
+  --primary: oklch(0.45 0.12 180); /* #0d7377 - Deep green/teal primary */
+  --primary-foreground: oklch(1 0 0); /* #ffffff - White text on primary */
+  --secondary: oklch(0.7 0.08 220); /* #5fb3d4 - Light blue secondary */
+  --secondary-foreground: oklch(0.2 0.02 180); /* #1a2e2e - Dark text on secondary */
+  --muted: oklch(0.96 0.01 180); /* #f0f9f9 - Very light teal muted background */
+  --muted-foreground: oklch(0.45 0.02 180); /* Muted teal text */
+  --accent: oklch(0.75 0.15 85); /* #f4c430 - Yellow/gold accent */
+  --accent-foreground: oklch(0.2 0.02 180); /* #1a2e2e - Dark text on accent */
+  --destructive: oklch(0.55 0.25 25); /* #dc2626 - Red for destructive actions */
+  --destructive-foreground: oklch(1 0 0); /* #ffffff - White text on destructive */
+  --border: oklch(0.9 0.01 180); /* #e6f2f2 - Light teal borders */
+  --input: oklch(0.98 0.01 180); /* #f7fcfc - Very light teal input background */
+  --ring: oklch(0.45 0.12 180 / 0.5); /* Primary color with opacity for focus rings */
+  --chart-1: oklch(0.45 0.12 180); /* Deep teal - Chart color 1 */
+  --chart-2: oklch(0.7 0.08 220); /* Light blue - Chart color 2 */
+  --chart-3: oklch(0.75 0.15 85); /* Yellow/gold - Chart color 3 */
+  --chart-4: oklch(0.6 0.1 160); /* Green - Chart color 4 */
+  --chart-5: oklch(0.55 0.25 25); /* Red - Chart color 5 */
+  --radius: 0.5rem;
+  --sidebar: oklch(0.98 0.01 180); /* #f7fcfc - Light teal sidebar background */
+  --sidebar-foreground: oklch(0.2 0.02 180); /* #1a2e2e - Sidebar text */
+  --sidebar-primary: oklch(0.45 0.12 180); /* #0d7377 - Primary sidebar actions */
+  --sidebar-primary-foreground: oklch(1 0 0); /* #ffffff - Text on primary sidebar */
+  --sidebar-accent: oklch(0.7 0.08 220); /* #5fb3d4 - Light blue sidebar accent */
+  --sidebar-accent-foreground: oklch(0.2 0.02 180); /* #1a2e2e - Text on sidebar accent */
+  --sidebar-border: oklch(0.9 0.01 180); /* #e6f2f2 - Sidebar borders */
+  --sidebar-ring: oklch(0.45 0.12 180 / 0.5); /* Primary ring for sidebar */
+}
+
+.dark {
+  /* Updated dark mode colors to maintain teal/green theme */
+  --background: oklch(0.08 0.02 180); /* #0a1414 - Very dark teal */
+  --foreground: oklch(0.95 0.01 180); /* #f0f9f9 - Light teal-white */
+  --card: oklch(0.12 0.02 180); /* #0f1f1f - Dark teal card background */
+  --card-foreground: oklch(0.95 0.01 180); /* #f0f9f9 - Light text on cards */
+  --popover: oklch(0.08 0.02 180); /* #0a1414 - Dark teal popover */
+  --popover-foreground: oklch(0.95 0.01 180); /* #f0f9f9 - Light popover text */
+  --primary: oklch(0.6 0.12 180); /* #14a085 - Brighter teal primary for dark mode */
+  --primary-foreground: oklch(0.08 0.02 180); /* #0a1414 - Dark text on primary */
+  --secondary: oklch(0.25 0.02 180); /* #1a3333 - Dark teal secondary */
+  --secondary-foreground: oklch(0.95 0.01 180); /* #f0f9f9 - Light text on secondary */
+  --muted: oklch(0.15 0.02 180); /* #122424 - Dark teal muted */
+  --muted-foreground: oklch(0.65 0.01 180); /* #a6cccc - Muted light teal */
+  --accent: oklch(0.8 0.15 85); /* #f7d94c - Brighter yellow/gold for dark mode */
+  --accent-foreground: oklch(0.08 0.02 180); /* #0a1414 - Dark text on accent */
+  --destructive: oklch(0.45 0.2 25); /* #b91c1c - Darker red for dark mode */
+  --destructive-foreground: oklch(0.95 0.01 180); /* #f0f9f9 - Light text on destructive */
+  --border: oklch(0.2 0.02 180); /* #1a3333 - Dark teal borders */
+  --input: oklch(0.15 0.02 180); /* #122424 - Dark teal input background */
+  --ring: oklch(0.6 0.12 180 / 0.5); /* Bright teal ring for dark mode */
+  --chart-1: oklch(0.6 0.12 180); /* Bright teal */
+  --chart-2: oklch(0.7 0.08 220); /* Light blue */
+  --chart-3: oklch(0.8 0.15 85); /* Bright yellow/gold */
+  --chart-4: oklch(0.65 0.1 160); /* Bright green */
+  --chart-5: oklch(0.65 0.25 15); /* Bright red */
+  --sidebar: oklch(0.12 0.02 180); /* #0f1f1f - Dark teal sidebar */
+  --sidebar-foreground: oklch(0.95 0.01 180); /* #f0f9f9 - Light sidebar text */
+  --sidebar-primary: oklch(0.6 0.12 180); /* #14a085 - Bright teal primary */
+  --sidebar-primary-foreground: oklch(0.08 0.02 180); /* #0a1414 - Dark text on primary */
+  --sidebar-accent: oklch(0.25 0.02 180); /* #1a3333 - Dark teal accent */
+  --sidebar-accent-foreground: oklch(0.95 0.01 180); /* #f0f9f9 - Light text on accent */
+  --sidebar-border: oklch(0.2 0.02 180); /* #1a3333 - Dark teal borders */
+  --sidebar-ring: oklch(0.6 0.12 180 / 0.5); /* Bright teal ring */
+}
+
+@theme inline {
+  /* Updated font variables to use Poppins for headings and Roboto for body */
+  --font-sans: var(--font-roboto); /* Roboto for body text */
+  --font-heading: var(--font-poppins); /* Poppins for headings */
+  --font-mono: var(--font-geist-mono);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  /* Added typography classes for headings using Poppins */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-poppins);
+  }
+  /* Improved line height for better readability */
+  p,
+  li,
+  span {
+    @apply leading-relaxed;
+  }
+}
