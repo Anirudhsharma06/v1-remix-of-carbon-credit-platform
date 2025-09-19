@@ -146,8 +146,12 @@ export function Navigation({ userRole, showAuthButtons = false }: NavigationProp
 
   const handleSignOut = async () => {
     try {
+      console.log("[v0] Starting signout process...")
+
+      // Clear wallet connection first
       if (walletAddress && window.ethereum) {
         try {
+          console.log("[v0] Attempting to disconnect MetaMask...")
           // Clear the wallet connection by requesting accounts again with empty permissions
           await window.ethereum.request({
             method: "wallet_revokePermissions",
@@ -160,11 +164,36 @@ export function Navigation({ userRole, showAuthButtons = false }: NavigationProp
         }
       }
 
-      await supabase.auth.signOut()
+      console.log("[v0] Attempting Supabase signout...")
+      const { error } = await supabase.auth.signOut()
+
+      if (error) {
+        console.error("[v0] Supabase signout error:", error)
+        throw error
+      }
+
+      console.log("[v0] Supabase signout successful")
+
+      // Clear local state
       setWalletAddress("")
+      setUser(null)
+      setProfile(null)
+
+      console.log("[v0] Redirecting to home page...")
       router.push("/")
+
+      setTimeout(() => {
+        window.location.href = "/"
+      }, 100)
     } catch (error) {
-      console.error("Error signing out:", error)
+      console.error("[v0] Error during signout:", error)
+      setWalletAddress("")
+      setUser(null)
+      setProfile(null)
+      router.push("/")
+      setTimeout(() => {
+        window.location.href = "/"
+      }, 100)
     }
   }
 
@@ -229,20 +258,27 @@ export function Navigation({ userRole, showAuthButtons = false }: NavigationProp
             {user && !loading ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="outline" size="sm" className="bg-transparent">
+                  <Button variant="outline" size="sm" className="bg-transparent hover:bg-accent/10">
                     <User className="h-4 w-4 mr-2" />
                     {profile?.full_name || user.email}
                   </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-56">
+                <DropdownMenuContent
+                  align="end"
+                  className="w-56 bg-popover border border-border shadow-lg"
+                  sideOffset={5}
+                >
                   <DropdownMenuItem asChild>
-                    <Link href={getDashboardLink()}>
+                    <Link href={getDashboardLink()} className="cursor-pointer">
                       <Settings className="h-4 w-4 mr-2" />
                       Dashboard
                     </Link>
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem onClick={handleSignOut} className="text-destructive">
+                  <DropdownMenuItem
+                    onClick={handleSignOut}
+                    className="text-destructive cursor-pointer focus:text-destructive-foreground focus:bg-destructive/10"
+                  >
                     <LogOut className="h-4 w-4 mr-2" />
                     Sign Out
                   </DropdownMenuItem>
